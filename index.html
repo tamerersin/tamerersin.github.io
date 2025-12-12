@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Book Sanctuary | A Literary Journey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FFF8E7;
+            --deep-brown: #2C1810;
+            --warm-rust: #8B4513;
+            --gold: #D4AF37;
+            --soft-beige: #E8DCC4;
+            --dark-green: #1B3A2F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background: var(--cream);
+            color: var(--deep-brown);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0,0,0,0.01) 2px,
+                    rgba(0,0,0,0.01) 4px
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--deep-brown) 0%, var(--warm-rust) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--cream);
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            animation: fadeInUp 1.2s ease-out 0.2s both;
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            font-style: italic;
+            letter-spacing: 3px;
+            color: var(--gold);
+            animation: fadeInUp 1.2s ease-out 0.4s both;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(15px); }
+        }
+
+        .scroll-indicator::after {
+            content: '↓';
+            font-size: 2rem;
+            color: var(--gold);
+        }
+
+        /* Search Section */
+        .search-section {
+            padding: 4rem 2rem;
+            background: var(--soft-beige);
+            text-align: center;
+        }
+
+        .search-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .search-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--deep-brown);
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.2rem 3.5rem 1.2rem 1.5rem;
+            font-size: 1.1rem;
+            font-family: 'Crimson Text', serif;
+            border: 3px solid var(--warm-rust);
+            border-radius: 50px;
+            background: white;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .search-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 6px 25px rgba(212,175,55,0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: var(--warm-rust);
+            pointer-events: none;
+        }
+
+        .search-results {
+            margin-top: 1rem;
+            text-align: left;
+            font-size: 1rem;
+            color: var(--warm-rust);
+        }
+
+        .quote-section {
+            padding: 8rem 2rem;
+            background: var(--deep-brown);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-section::before,
+        .quote-section::after {
+            content: '"';
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 20rem;
+            color: rgba(212,175,55,0.1);
+            font-weight: 900;
+        }
+
+        .quote-section::before {
+            top: -5rem;
+            left: 5%;
+        }
+
+        .quote-section::after {
+            bottom: -5rem;
+            right: 5%;
+            content: '"';
+        }
+
+        .quote-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3vw, 3rem);
+            color: var(--cream);
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .quote-author {
+            font-size: 1.3rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .books-section {
+            padding: 8rem 2rem;
+            background: var(--cream);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--deep-brown);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .books-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            padding: 0 2rem;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            animation: fadeIn 0.6s ease-out both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .book-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .book-cover {
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.2) 100%);
+        }
+
+        .book-info {
+            padding: 2rem;
+        }
+
+        .book-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--deep-brown);
+        }
+
+        .book-author {
+            color: var(--warm-rust);
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .book-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .book-genre {
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            animation: fadeIn 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: var(--cream);
+            margin: 5% auto;
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+            animation: slideDown 0.4s ease;
+            box-shadow: 0 20px 80px rgba(0,0,0,0.4);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 2rem;
+            top: 2rem;
+            font-size: 3rem;
+            color: var(--warm-rust);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            color: var(--deep-brown);
+            transform: rotate(90deg);
+        }
+
+        .modal-book-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: var(--deep-brown);
+        }
+
+        .modal-book-author {
+            color: var(--warm-rust);
+            font-style: italic;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .modal-book-genre {
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .modal-book-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--deep-brown);
+            margin-bottom: 2rem;
+        }
+
+        .modal-book-details {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid var(--gold);
+        }
+
+        .modal-book-details h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--deep-brown);
+        }
+
+        .modal-book-details p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .reading-list-section {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, var(--soft-beige) 0%, var(--cream) 100%);
+        }
+
+        .reading-list {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .reading-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid var(--gold);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            animation: slideInLeft 0.6s ease-out both;
+        }
+
+        .reading-item:nth-child(1) { animation-delay: 0.1s; }
+        .reading-item:nth-child(2) { animation-delay: 0.2s; }
+        .reading-item:nth-child(3) { animation-delay: 0.3s; }
+        .reading-item:nth-child(4) { animation-delay: 0.4s; }
+        .reading-item:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .reading-item:hover {
+            transform: translateX(10px);
+            border-left-width: 8px;
+        }
+
+        .reading-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            color: var(--deep-brown);
+        }
+
+        .reading-item .author {
+            color: var(--warm-rust);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .reading-item .genre {
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            background: var(--deep-brown);
+            color: var(--cream);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: var(--gold);
+        }
+
+        .footer-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .made-by {
+            font-size: 1rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212,175,55,0.3);
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        .made-by span {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            font-size: 1.5rem;
+            color: var(--warm-rust);
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .books-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            .quote-text {
+                font-size: 1.5rem;
+            }
+
+            .modal-content {
+                padding: 2rem;
+                margin: 10% auto;
+            }
+
+            .modal-book-title {
+                font-size: 2rem;
+            }
+
+            .close-modal {
+                right: 1rem;
+                top: 1rem;
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="hero-content">
+                <h1>The Book Sanctuary</h1>
+                <p class="subtitle">A Journey Through Literary Worlds</p>
+            </div>
+            <div class="scroll-indicator"></div>
+        </header>
+
+        <section class="search-section">
+            <div class="search-container">
+                <h2 class="search-title">Search Books</h2>
+                <div class="search-box">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search by title, author, or genre...">
+                    <span class="search-icon">🔍</span>
+                </div>
+                <div id="searchResults" class="search-results"></div>
+            </div>
+        </section>
+
+        <section class="quote-section">
+            <div class="quote-content">
+                <p class="quote-text">A reader lives a thousand lives before he dies. The man who never reads lives only one.</p>
+                <p class="quote-author">— George R.R. Martin</p>
+            </div>
+        </section>
+
+        <section class="books-section">
+            <h2 class="section-title">Featured Books</h2>
+            <div class="books-grid" id="booksGrid">
+                <!-- Books will be dynamically inserted here -->
+            </div>
+            <div id="noResults" class="no-results" style="display: none;">
+                No books found matching your search criteria.
+            </div>
+        </section>
+
+        <section class="reading-list-section">
+            <h2 class="section-title">Currently Reading</h2>
+            <div class="reading-list">
+                <div class="reading-item">
+                    <h3>The Midnight Library</h3>
+                    <p class="author">Matt Haig</p>
+                    <p>A thought-provoking novel about infinite possibilities and the choices that shape our lives.</p>
+                    <span class="genre">Contemporary Fiction</span>
+                </div>
+
+                <div class="reading-item">
+                    <h3>Educated</h3>
+                    <p class="author">Tara Westover</p>
+                    <p>A powerful memoir about a woman who grew up in a survivalist family and eventually earned a PhD from Cambridge.</p>
+                    <span class="genre">Memoir</span>
+                </div>
+
+                <div class="reading-item">
+                    <h3>The Song of Achilles</h3>
+                    <p class="author">Madeline Miller</p>
+                    <p>A stunning retelling of the Trojan War through the relationship between Achilles and Patroclus.</p>
+                    <span class="genre">Historical Fiction</span>
+                </div>
+
+                <div class="reading-item">
+                    <h3>Atomic Habits</h3>
+                    <p class="author">James Clear</p>
+                    <p>A practical guide to building good habits and breaking bad ones through tiny changes.</p>
+                    <span class="genre">Self-Help</span>
+                </div>
+
+                <div class="reading-item">
+                    <h3>The Seven Husbands of Evelyn Hugo</h3>
+                    <p class="author">Taylor Jenkins Reid</p>
+                    <p>A captivating story of a Hollywood icon revealing her glamorous and scandalous life to an unknown journalist.</p>
+                    <span class="genre">Historical Fiction</span>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p class="footer-quote">"Books are a uniquely portable magic."</p>
+                <p class="footer-text">
+                    Thank you for visiting The Book Sanctuary. May your reading journey be filled with wonder, discovery, and endless adventures through the pages of great literature.
+                </p>
+                <p style="margin-top: 2rem; opacity: 0.7;">© 2025 The Book Sanctuary</p>
+                <p class="made-by">Made by <span>Tamer Ersin</span></p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal for book details -->
+    <div id="bookModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 class="modal-book-title" id="modalTitle"></h2>
+            <p class="modal-book-author" id="modalAuthor"></p>
+            <span class="modal-book-genre" id="modalGenre"></span>
+            <p class="modal-book-description" id="modalDescription"></p>
+            <div class="modal-book-details">
+                <h3>Detailed Information</h3>
+                <p id="modalDetails"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const books = [
+            {
+                title: "The Great Gatsby",
+                author: "F. Scott Fitzgerald",
+                genre: "Classic Fiction",
+                description: "A timeless tale of wealth, love, and the American Dream in the Jazz Age, following the mysterious Jay Gatsby and his obsession with Daisy Buchanan.",
+                details: "Set in the summer of 1922, this masterpiece captures the decadence and disillusionment of the Roaring Twenties. Through the eyes of narrator Nick Carraway, we witness the tragic story of Jay Gatsby's pursuit of his lost love. The novel explores themes of idealism, social upheaval, and excess, creating a cautionary tale about the American Dream.",
+                color: "linear-gradient(135deg, #1B3A2F, #2C5F4F)"
+            },
+            {
+                title: "1984",
+                author: "George Orwell",
+                genre: "Dystopian Fiction",
+                description: "A dystopian masterpiece exploring surveillance, totalitarianism, and the power of language in a world where Big Brother watches everything.",
+                details: "Published in 1949, this prophetic novel depicts a totalitarian future where independent thinking is forbidden. Winston Smith works at the Ministry of Truth, rewriting history to fit the Party's narrative. The novel introduces concepts like 'thoughtcrime,' 'doublethink,' and 'Big Brother' that remain relevant today in discussions about privacy, propaganda, and government overreach.",
+                color: "linear-gradient(135deg, #8B4513, #A0522D)"
+            },
+            {
+                title: "Pride and Prejudice",
+                author: "Jane Austen",
+                genre: "Romance",
+                description: "A witty romance following Elizabeth Bennet as she navigates society, family, and her complicated relationship with the proud Mr. Darcy.",
+                details: "First published in 1813, this beloved novel explores the themes of marriage, morality, and misconception in Regency England. Elizabeth Bennet's sharp wit and independence set her apart in a society where women's futures depend on advantageous marriages. The novel's exploration of pride, prejudice, and the evolution of first impressions remains universally relevant.",
+                color: "linear-gradient(135deg, #4A0E0E, #8B1A1A)"
+            },
+            {
+                title: "To Kill a Mockingbird",
+                author: "Harper Lee",
+                genre: "Classic Fiction",
+                description: "A powerful story of racial injustice and childhood innocence in the American South, told through the eyes of young Scout Finch.",
+                details: "Set in 1930s Alabama, this Pulitzer Prize-winning novel follows Scout Finch and her brother Jem as their father, lawyer Atticus Finch, defends a Black man falsely accused of rape. The story beautifully captures the loss of innocence while confronting the harsh realities of prejudice, courage, and moral integrity in a deeply divided society.",
+                color: "linear-gradient(135deg, #1A1A2E, #16213E)"
+            },
+            {
+                title: "The Catcher in the Rye",
+                author: "J.D. Salinger",
+                genre: "Coming-of-Age",
+                description: "An iconic coming-of-age story following Holden Caulfield's rebellious journey through New York City after being expelled from prep school.",
+                details: "Narrated by the cynical yet vulnerable Holden Caulfield, this 1951 novel captures teenage angst and alienation. Over a few days in New York City, Holden grapples with the 'phoniness' of adult society, his own identity, and the pain of growing up. The novel's authentic teenage voice revolutionized young adult literature.",
+                color: "linear-gradient(135deg, #2E1A47, #4A2B6A)"
+            },
+            {
+                title: "One Hundred Years of Solitude",
+                author: "Gabriel García Márquez",
+                genre: "Magical Realism",
+                description: "A magical realist epic chronicling the Buendía family through seven generations in the mythical town of Macondo.",
+                details: "This 1967 masterpiece blends reality with fantasy to tell the story of the Buendía family and the town they founded. Through births, deaths, loves, and wars, Márquez creates a rich tapestry of Latin American history and mythology. The novel's circular narrative and vivid imagery revolutionized literature and defined the magical realism genre.",
+                color: "linear-gradient(135deg, #0F4C3A, #1B7A5C)"
+            },
+            {
+                title: "The Lord of the Rings",
+                author: "J.R.R. Tolkien",
+                genre: "Fantasy",
+                description: "An epic high fantasy trilogy following the quest to destroy the One Ring and save Middle-earth from the Dark Lord Sauron.",
+                details: "This monumental work created an entire world with its own languages, histories, and mythologies. Frodo Baggins and the Fellowship must journey across Middle-earth to destroy a powerful ring before it falls into evil hands. Tolkien's masterpiece explores themes of courage, friendship, sacrifice, and the corrupting nature of power, setting the standard for modern fantasy literature.",
+                color: "linear-gradient(135deg, #1a1a1a, #4a4a4a)"
+            },
+            {
+                title: "Harry Potter and the Philosopher's Stone",
+                author: "J.K. Rowling",
+                genre: "Fantasy",
+                description: "A young boy discovers he's a wizard and begins his magical education at Hogwarts School of Witchcraft and Wizardry.",
+                details: "The book that launched a global phenomenon introduces us to Harry Potter, an orphan who discovers on his eleventh birthday that he's famous in the wizarding world. As Harry navigates his first year at Hogwarts, he makes friends, faces enemies, and uncovers secrets about his past. The story beautifully combines magic with universal themes of belonging, friendship, and good versus evil.",
+                color: "linear-gradient(135deg, #740001, #ae0001)"
+            },
+            {
+                title: "The Hobbit",
+                author: "J.R.R. Tolkien",
+                genre: "Fantasy",
+                description: "Bilbo Baggins, a comfortable hobbit, is swept into an epic quest to reclaim a treasure guarded by the dragon Smaug.",
+                details: "Before The Lord of the Rings, there was this charming tale of adventure. Bilbo Baggins is recruited by the wizard Gandalf and a group of dwarves for an unexpected journey. Along the way, he discovers courage he never knew he had and encounters a mysterious ring that will change Middle-earth's fate. The story serves as a perfect introduction to Tolkien's richly imagined world.",
+                color: "linear-gradient(135deg, #2d5016, #4a7c2a)"
+            },
+            {
+                title: "Crime and Punishment",
+                author: "Fyodor Dostoevsky",
+                genre: "Philosophical Fiction",
+                description: "A psychological thriller about a poor student who commits murder and struggles with guilt and redemption.",
+                details: "This 1866 masterpiece delves deep into the mind of Rodion Raskolnikov, a former student who believes he can transcend moral law. After murdering a pawnbroker, he's consumed by paranoia and guilt. The novel explores themes of poverty, morality, redemption, and the nature of evil through intense psychological realism that influenced countless writers and thinkers.",
+                color: "linear-gradient(135deg, #2c1810, #4a2a1a)"
+            },
+            {
+                title: "The Brothers Karamazov",
+                author: "Fyodor Dostoevsky",
+                genre: "Philosophical Fiction",
+                description: "A complex family drama exploring faith, doubt, free will, and morality through the lives of three brothers.",
+                details: "Dostoevsky's final novel is considered his masterpiece, weaving together philosophical, spiritual, and psychological themes. The three Karamazov brothers—intellectual Ivan, passionate Dmitri, and spiritual Alyosha—represent different aspects of the human soul. When their father is murdered, the story becomes a profound meditation on faith, reason, morality, and the existence of God.",
+                color: "linear-gradient(135deg, #1a1a2e, #2e3a52)"
+            },
+            {
+                title: "Brave New World",
+                author: "Aldous Huxley",
+                genre: "Dystopian Fiction",
+                description: "A chilling vision of a future world where people are genetically engineered and conditioned for happiness in a totalitarian society.",
+                details: "Published in 1932, this prescient novel imagines a world where human beings are manufactured in laboratories and conditioned to accept their predetermined roles in society. Unlike Orwell's oppressive dystopia, Huxley's World State controls through pleasure and distraction. The novel raises profound questions about individuality, freedom, technology, and what it means to be human.",
+                color: "linear-gradient(135deg, #0d3b66, #1e5a8e)"
+            },
+            {
+                title: "The Hitchhiker's Guide to the Galaxy",
+                author: "Douglas Adams",
+                genre: "Science Fiction Comedy",
+                description: "A hilarious cosmic adventure begins when Earth is demolished to make way for a hyperspace bypass.",
+                details: "Arthur Dent, still in his bathrobe, escapes Earth's destruction thanks to his friend Ford Prefect, who's actually an alien researcher for the titular guidebook. Their journey through space introduces absurd aliens, impossible situations, and philosophical questions answered with '42.' Adams' satirical masterpiece combines science fiction with British humor to create a uniquely entertaining commentary on life, the universe, and everything.",
+                color: "linear-gradient(135deg, #1a1a3e, #2a2a6e)"
+            },
+            {
+                title: "Dune",
+                author: "Frank Herbert",
+                genre: "Science Fiction",
+                description: "An epic space opera following Paul Atreides as his family is thrust into a battle for control of the desert planet Arrakis.",
+                details: "Set in a distant future where noble houses control planets, this 1965 masterpiece combines politics, religion, ecology, and technology. Young Paul Atreides must navigate complex power struggles, survive in the harsh desert, and embrace his destiny among the Fremen people. Herbert's intricate world-building and exploration of power, religion, and environmental themes make this a cornerstone of science fiction.",
+                color: "linear-gradient(135deg, #8b4513, #d2691e)"
+            },
+            {
+                title: "The Handmaid's Tale",
+                author: "Margaret Atwood",
+                genre: "Dystopian Fiction",
+                description: "In a totalitarian future, women are enslaved for reproductive purposes in the Republic of Gilead.",
+                details: "Offred is a Handmaid in the totalitarian theocracy of Gilead, where women have been stripped of their rights and reduced to biological functions. Through her eyes, we witness a chilling near-future America where environmental disasters and plummeting fertility rates have led to an extreme patriarchal regime. Atwood's powerful novel serves as both warning and commentary on reproductive rights, religious fundamentalism, and resistance.",
+                color: "linear-gradient(135deg, #8b0000, #b22222)"
+            },
+            {
+                title: "The Alchemist",
+                author: "Paulo Coelho",
+                genre: "Philosophical Fiction",
+                description: "A young shepherd's journey to find treasure teaches him about listening to his heart and following his dreams.",
+                details: "Santiago, an Andalusian shepherd, dreams of treasure hidden near the Egyptian pyramids. His journey becomes a spiritual quest as he learns to listen to his heart, read omens, and understand the Soul of the World. This modern fable about pursuing one's Personal Legend has inspired millions with its message about the transformative power of following your dreams.",
+                color: "linear-gradient(135deg, #d4af37, #ffd700)"
+            },
+            {
+                title: "The Picture of Dorian Gray",
+                author: "Oscar Wilde",
+                genre: "Gothic Fiction",
+                description: "A handsome young man sells his soul for eternal youth, while his portrait ages and reflects his moral corruption.",
+                details: "Dorian Gray wishes that his portrait would age instead of him, and his wish is granted. As he pursues a life of hedonism and vice, his portrait becomes increasingly hideous while he remains young and beautiful. Wilde's only novel is a masterpiece of Gothic horror and a meditation on aestheticism, morality, vanity, and the destructive nature of beauty and pleasure-seeking.",
+                color: "linear-gradient(135deg, #2c1a42, #4a2d6a)"
+            },
+            {
+                title: "Wuthering Heights",
+                author: "Emily Brontë",
+                genre: "Gothic Romance",
+                description: "A passionate and destructive love story set on the Yorkshire moors, spanning two generations.",
+                details: "The intense, almost supernatural love between Heathcliff and Catherine Earnshaw drives this dark romantic novel. When social ambition separates them, Heathcliff's quest for revenge destroys two families across generations. Brontë's only novel is a powerful exploration of love, obsession, revenge, and the destructive power of passion, set against the wild beauty of the Yorkshire moors.",
+                color: "linear-gradient(135deg, #2f1e3d, #4a3151)"
+            },
+            {
+                title: "The Count of Monte Cristo",
+                author: "Alexandre Dumas",
+                genre: "Adventure",
+                description: "A wrongly imprisoned sailor escapes, finds treasure, and returns to Paris to exact revenge on those who betrayed him.",
+                details: "Edmond Dantès is betrayed by false friends and unjustly imprisoned. After years in the Château d'If, he escapes, discovers an immense treasure, and reinvents himself as the mysterious Count of Monte Cristo. His elaborate revenge plot against those who destroyed his life is a masterclass in adventure storytelling, exploring themes of justice, revenge, mercy, and redemption.",
+                color: "linear-gradient(135deg, #1a1a1a, #2d2d2d)"
+            },
+            {
+                title: "Jane Eyre",
+                author: "Charlotte Brontë",
+                genre: "Gothic Romance",
+                description: "An orphaned girl becomes a governess and falls in love with her mysterious employer, Mr. Rochester.",
+                details: "Jane Eyre's journey from abused orphan to independent woman was revolutionary for its time. Working as governess at Thornfield Hall, she falls in love with the brooding Mr. Rochester, only to discover a dark secret that threatens their happiness. This classic explores themes of class, sexuality, religion, and feminism through a heroine who refuses to compromise her principles.",
+                color: "linear-gradient(135deg, #4a1a1a, #6a2a2a)"
+            },
+            {
+                title: "The Odyssey",
+                author: "Homer",
+                genre: "Epic Poetry",
+                description: "The epic Greek poem following Odysseus's ten-year journey home after the Trojan War.",
+                details: "One of the oldest works of Western literature, this ancient epic follows the hero Odysseus as he struggles to return home to Ithaca after the Trojan War. Facing monsters, gods, and impossible challenges, Odysseus demonstrates cunning and resilience. Meanwhile, his wife Penelope fends off suitors while waiting for his return. This foundational work explores themes of perseverance, loyalty, and the costs of war.",
+                color: "linear-gradient(135deg, #1a3a5a, #2a5a8a)"
+            },
+            {
+                title: "Moby-Dick",
+                author: "Herman Melville",
+                genre: "Adventure",
+                description: "Captain Ahab's obsessive quest for revenge against the white whale that took his leg.",
+                details: "Narrated by sailor Ishmael, this epic tale follows the voyage of the Pequod and its captain's monomaniacal pursuit of Moby Dick, the great white whale. More than just an adventure story, it's a complex meditation on obsession, fate, nature, and the American spirit. Melville's masterpiece combines detailed whaling knowledge with philosophical depth and symbolic richness.",
+                color: "linear-gradient(135deg, #0d3b52, #1a5a7a)"
+            },
+            {
+                title: "The Divine Comedy",
+                author: "Dante Alighieri",
+                genre: "Epic Poetry",
+                description: "Dante's journey through Hell, Purgatory, and Paradise, guided by the poet Virgil and his beloved Beatrice.",
+                details: "Written in the 14th century, this epic poem takes readers through the three realms of the afterlife. In Inferno, Dante descends through nine circles of Hell, witnessing punishments that fit various sins. In Purgatorio, souls work toward redemption, and in Paradiso, he ascends through the spheres of Heaven. This masterwork combines theology, philosophy, and politics into one of the greatest poems ever written.",
+                color: "linear-gradient(135deg, #2a1a1a, #4a2a2a)"
+            },
+            {
+                title: "Don Quixote",
+                author: "Miguel de Cervantes",
+                genre: "Satire",
+                description: "An aging gentleman becomes a self-proclaimed knight and sets out to revive chivalry with his loyal squire Sancho Panza.",
+                details: "Often called the first modern novel, this 17th-century masterpiece follows Alonso Quixano, who loses his sanity reading chivalric romances and becomes Don Quixote. With his faithful squire Sancho Panza, he embarks on absurd adventures, famously attacking windmills he believes are giants. Cervantes' work is a profound exploration of reality versus fantasy, idealism, and the power of stories.",
+                color: "linear-gradient(135deg, #d4af37, #b8941f)"
+            },
+            {
+                title: "War and Peace",
+                author: "Leo Tolstoy",
+                genre: "Historical Fiction",
+                description: "An epic chronicle of Russian society during the Napoleonic Wars, following several aristocratic families.",
+                details: "This monumental work interweaves the lives of five aristocratic families against the backdrop of Napoleon's invasion of Russia. Through hundreds of characters and philosophical digressions, Tolstoy explores the nature of history, free will, and the meaning of life. The novel's scope and depth make it one of the greatest achievements in world literature.",
+                color: "linear-gradient(135deg, #2a1a2a, #4a2a4a)"
+            },
+            {
+                title: "Anna Karenina",
+                author: "Leo Tolstoy",
+                genre: "Tragic Romance",
+                description: "A married woman's passionate affair leads to her tragic downfall in Imperial Russian society.",
+                details: "Opening with one of literature's most famous lines—'All happy families are alike; each unhappy family is unhappy in its own way'—this novel tells two parallel stories. Anna's tragic love affair with Count Vronsky defies social convention, while Levin searches for meaning in rural life. Tolstoy masterfully examines love, marriage, family, faith, and the struggle between tradition and modernity.",
+                color: "linear-gradient(135deg, #6a1a1a, #8a2a2a)"
+            },
+            {
+                title: "The Grapes of Wrath",
+                author: "John Steinbeck",
+                genre: "Social Realism",
+                description: "The Joad family leaves their Oklahoma farm during the Dust Bowl and travels to California seeking a better life.",
+                details: "This Pulitzer Prize-winning novel follows the Joads as they join thousands of displaced farmers heading west during the Great Depression. Their journey exposes the harsh realities of migrant labor, economic exploitation, and the resilience of the human spirit. Steinbeck's powerful social commentary remains relevant in discussions of poverty, injustice, and the American Dream.",
+                color: "linear-gradient(135deg, #5a3a1a, #7a4a2a)"
+            },
+            {
+                title: "Slaughterhouse-Five",
+                author: "Kurt Vonnegut",
+                genre: "Science Fiction",
+                description: "Billy Pilgrim becomes 'unstuck in time' and witnesses the bombing of Dresden during World War II.",
+                details: "Part science fiction, part war memoir, this anti-war novel follows Billy Pilgrim, who experiences events in his life out of sequence, including his capture by aliens and his survival of the Dresden firebombing. Vonnegut's darkly comic masterpiece uses non-linear narrative and science fiction elements to explore trauma, free will, and the absurdity of war.",
+                color: "linear-gradient(135deg, #3a2a4a, #5a4a6a)"
+            },
+            {
+                title: "Catch-22",
+                author: "Joseph Heller",
+                genre: "Satire",
+                description: "A darkly comic novel about the absurdity of war, centered on a World War II bombardier trying to survive.",
+                details: "Captain John Yossarian is trapped by Catch-22: he's crazy to keep flying dangerous missions, but requesting to be grounded proves he's sane enough to fly. Heller's satirical masterpiece exposes the paradoxes and bureaucratic insanity of military life and warfare. The term 'Catch-22' has entered the language to describe any no-win situation created by contradictory rules.",
+                color: "linear-gradient(135deg, #4a4a2a, #6a6a3a)"
+            },
+            {
+                title: "The Bell Jar",
+                author: "Sylvia Plath",
+                genre: "Psychological Fiction",
+                description: "A young woman's descent into mental illness in 1950s New York, semi-autobiographical exploration of depression.",
+                details: "Esther Greenwood, a talented college student, wins a magazine internship in New York but finds herself increasingly disconnected from reality. Plath's only novel is a powerful portrayal of depression and the struggle for identity in a society with rigid expectations for women. The 'bell jar' represents the suffocating nature of mental illness and societal pressure.",
+                color: "linear-gradient(135deg, #4a2a4a, #6a3a6a)"
+            },
+            {
+                title: "The Sun Also Rises",
+                author: "Ernest Hemingway",
+                genre: "Modernist Fiction",
+                description: "A group of American and British expatriates travel from Paris to Pamplona for the running of the bulls.",
+                details: "Jake Barnes, wounded in World War I, and his friends drift through post-war Europe seeking meaning in a world forever changed. Set against the backdrop of bullfighting in Spain, the novel captures the 'Lost Generation's' disillusionment, examining themes of love, masculinity, and the search for authenticity. Hemingway's spare, direct prose style revolutionized American literature.",
+                color: "linear-gradient(135deg, #d4a62a, #f4c42a)"
+            },
+            {
+                title: "The Old Man and the Sea",
+                author: "Ernest Hemingway",
+                genre: "Literary Fiction",
+                description: "An aging Cuban fisherman struggles to catch a giant marlin in a test of strength and perseverance.",
+                details: "Santiago, an aging fisherman who hasn't caught a fish in 84 days, finally hooks a giant marlin far out at sea. His epic struggle to bring it in, and then to protect it from sharks, becomes a profound meditation on courage, dignity, and the human struggle against nature. This spare, powerful novella won Hemingway the Pulitzer Prize and contributed to his Nobel Prize.",
+                color: "linear-gradient(135deg, #1a5a7a, #2a7a9a)"
+            },
+            {
+                title: "Beloved",
+                author: "Toni Morrison",
+                genre: "Historical Fiction",
+                description: "A formerly enslaved woman is haunted by the ghost of her dead daughter in post-Civil War Ohio.",
+                details: "Sethe escaped slavery but cannot escape the trauma of her past, including the desperate act she committed to save her daughter from a slave owner. When a mysterious young woman appears, Sethe believes she's the ghost of her dead daughter, Beloved. Morrison's Pulitzer Prize-winning masterpiece powerfully explores the psychological trauma of slavery and its lasting impact on identity, family, and memory.",
+                color: "linear-gradient(135deg, #4a1a3a, #6a2a5a)"
+            }
+        ];
+
+        let filteredBooks = [...books];
+
+        function displayBooks(booksToDisplay) {
+            const grid = document.getElementById('booksGrid');
+            const noResults = document.getElementById('noResults');
+            
+            grid.innerHTML = '';
+            
+            if (booksToDisplay.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            noResults.style.display = 'none';
+            
+            booksToDisplay.forEach((book, index) => {
+                const card = document.createElement('article');
+                card.className = 'book-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.onclick = () => openModal(book);
+                
+                card.innerHTML = `
+                    <div class="book-cover" style="background: ${book.color};">
+                        ${book.title}
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">${book.title}</h3>
+                        <p class="book-author">${book.author}</p>
+                        <p class="book-description">${book.description}</p>
+                        <span class="book-genre">${book.genre}</span>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        function openModal(book) {
+            const modal = document.getElementById('bookModal');
+            document.getElementById('modalTitle').textContent = book.title;
+            document.getElementById('modalAuthor').textContent = book.author;
+            document.getElementById('modalGenre').textContent = book.genre;
+            document.getElementById('modalDescription').textContent = book.description;
+            document.getElementById('modalDetails').textContent = book.details;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('bookModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('bookModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                filteredBooks = [...books];
+                searchResults.textContent = '';
+            } else {
+                filteredBooks = books.filter(book => 
+                    book.title.toLowerCase().includes(searchTerm) ||
+                    book.author.toLowerCase().includes(searchTerm) ||
+                    book.genre.toLowerCase().includes(searchTerm) ||
+                    book.description.toLowerCase().includes(searchTerm)
+                );
+                
+                searchResults.textContent = `${filteredBooks.length} books found`;
+            }
+            
+            displayBooks(filteredBooks);
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Initial display
+        displayBooks(books);
+    </script>
+</body>
+</html>
