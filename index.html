@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Book Sanctuary | A Literary Journey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FFF8E7;
+            --deep-brown: #2C1810;
+            --warm-rust: #8B4513;
+            --gold: #D4AF37;
+            --soft-beige: #E8DCC4;
+            --dark-green: #1B3A2F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background: var(--cream);
+            color: var(--deep-brown);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Decorative paper texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0,0,0,0.01) 2px,
+                    rgba(0,0,0,0.01) 4px
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header with dramatic entrance */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--deep-brown) 0%, var(--warm-rust) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--cream);
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            animation: fadeInUp 1.2s ease-out 0.2s both;
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            font-style: italic;
+            letter-spacing: 3px;
+            color: var(--gold);
+            animation: fadeInUp 1.2s ease-out 0.4s both;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(15px); }
+        }
+
+        .scroll-indicator::after {
+            content: '↓';
+            font-size: 2rem;
+            color: var(--gold);
+        }
+
+        /* Quote Section */
+        .quote-section {
+            padding: 8rem 2rem;
+            background: var(--deep-brown);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-section::before,
+        .quote-section::after {
+            content: '"';
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 20rem;
+            color: rgba(212,175,55,0.1);
+            font-weight: 900;
+        }
+
+        .quote-section::before {
+            top: -5rem;
+            left: 5%;
+        }
+
+        .quote-section::after {
+            bottom: -5rem;
+            right: 5%;
+            content: '"';
+        }
+
+        .quote-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3vw, 3rem);
+            color: var(--cream);
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .quote-author {
+            font-size: 1.3rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        /* Books Grid Section */
+        .books-section {
+            padding: 8rem 2rem;
+            background: var(--cream);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--deep-brown);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .books-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            padding: 0 2rem;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--gold), var(--warm-rust));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .book-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--dark-green), var(--warm-rust));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--cream);
+            font-weight: 700;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.03) 10px,
+                rgba(255,255,255,0.03) 20px
+            );
+        }
+
+        .book-info {
+            padding: 2rem;
+        }
+
+        .book-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--deep-brown);
+            font-weight: 700;
+        }
+
+        .book-author {
+            font-size: 1.2rem;
+            color: var(--warm-rust);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .book-description {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Reading List Section */
+        .reading-list-section {
+            padding: 8rem 2rem;
+            background: var(--soft-beige);
+            position: relative;
+        }
+
+        .reading-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .reading-item {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--gold);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            animation: slideInLeft 0.6s ease-out both;
+        }
+
+        .reading-item:nth-child(1) { animation-delay: 0.1s; }
+        .reading-item:nth-child(2) { animation-delay: 0.2s; }
+        .reading-item:nth-child(3) { animation-delay: 0.3s; }
+        .reading-item:nth-child(4) { animation-delay: 0.4s; }
+        .reading-item:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .reading-item:hover {
+            transform: translateX(10px);
+            border-left-width: 8px;
+        }
+
+        .reading-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            color: var(--deep-brown);
+        }
+
+        .reading-item .author {
+            color: var(--warm-rust);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .reading-item .genre {
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--deep-brown);
+            color: var(--cream);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: var(--gold);
+        }
+
+        .footer-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .books-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            .quote-text {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="hero-content">
+                <h1>The Book Sanctuary</h1>
+                <p class="subtitle">A Journey Through Literary Worlds</p>
+            </div>
+            <div class="scroll-indicator"></div>
+        </header>
+
+        <section class="quote-section">
+            <div class="quote-content">
+                <p class="quote-text">A reader lives a thousand lives before he dies. The man who never reads lives only one.</p>
+                <p class="quote-author">— George R.R. Martin</p>
+            </div>
+        </section>
+
+        <section class="books-section">
+            <h2 class="section-title">Featured Books</h2>
+            <div class="books-grid">
+                <article class="book-card">
+                    <div class="book-cover" style="background: linear-gradient(135deg, #1B3A2F, #2C5F4F);">
+                        The Great Gatsby
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">The Great Gatsby</h3>
+                        <p class="book-author">F. Scott Fitzgerald</p>
+                        <p class="book-description">A timeless tale of wealth, love, and the American Dream in the Jazz Age, following the mysterious Jay Gatsby and his obsession with Daisy Buchanan.</p>
+                    </div>
+                </article>
+
+                <article class="book-card">
+                    <div class="book-cover" style="background: linear-gradient(135deg, #8B4513, #A0522D);">
+                        1984
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">1984</h3>
+                        <p class="book-author">George Orwell</p>
+                        <p class="book-description">A dystopian masterpiece exploring surveillance, totalitarianism, and the power of language in a world where Big Brother watches everything.</p>
+                    </div>
+                </article>
+
+                <article class="book-card">
+                    <div class="book-cover" style="background: linear-gradient(135deg, #4A0E0E, #8B1A1A);">
+                        Pride and Prejudice
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">Pride and Prejudice</h3>
+                        <p class="book-author">Jane Austen</p>
+                        <p class="book-description">A witty romance following Elizabeth Bennet as she navigates society, family, and her complicated relationship with the proud Mr. Darcy.</p>
+                    </div>
+                </article>
+
+                <article class="book-card">
+                    <div class="book-cover" style="background: linear-gradient(135deg, #1A1A2E, #16213E);">
+                        To Kill a Mockingbird
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">To Kill a Mockingbird</h3>
+                        <p class="book-author">Harper Lee</p>
+                        <p class="book-description">A powerful story of racial injustice and childhood innocence in the American South, told through the eyes of young Scout Finch.</p>
+                    </div>
+                </article>
+
+                <article class="book-card">
+                    <div class="book-cover" style="background: linear-gradient(135deg, #2E1A47, #4A2B6A);">
+                        The Catcher in the Rye
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">The Catcher in the Rye</h3>
+                        <p class="book-author">J.D. Salinger</p>
+                        <p class="book-description">An iconic coming-of-age story following Holden Caulfield's rebellious journey through New York City after being expelled from prep school.</p>
+                    </div>
+                </article>
+
+                <article class="book-card">
+                    <div class="book-cover" style="background: linear-gradient(135deg, #0F4C3A, #1B7A5C);">
+                        One Hundred Years of Solitude
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">One Hundred Years of Solitude</h3>
+                        <p class="book-author">Gabriel García Márquez</p>
+                        <p class="book-description">A magical realist epic chronicling the Buendía family through seven generations in the mythical town of Macondo.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="reading-list-section">
+            <h2 class="section-title">Currently Reading</h2>
+            <div class="reading-list">
+                <div class="reading-item">
+                    <h3>The Midnight Library</h3>
+                    <p class="author">Matt Haig</p>
+                    <p>A thought-provoking novel about infinite possibilities and the choices that shape our lives.</p>
+                    <span class="genre">Contemporary Fiction</span>
+                </div>
+
+                <div class="reading-item">
+                    <h3>Educated</h3>
+                    <p class="author">Tara Westover</p>
+                    <p>A powerful memoir about a woman who grew up in a survivalist family and eventually earned a PhD from Cambridge.</p>
+                    <span class="genre">Memoir</span>
+                </div>
+
+                <div class="reading-item">
+                    <h3>The Song of Achilles</h3>
+                    <p class="author">Madeline Miller</p>
+                    <p>A stunning retelling of the Trojan War through the relationship between Achilles and Patroclus.</p>
+                    <span class="genre">Historical Fiction</span>
+                </div>
+
+                <div class="reading-item">
+                    <h3>Atomic Habits</h3>
+                    <p class="author">James Clear</p>
+                    <p>A practical guide to building good habits and breaking bad ones through tiny changes.</p>
+                    <span class="genre">Self-Help</span>
+                </div>
+
+                <div class="reading-item">
+                    <h3>The Seven Husbands of Evelyn Hugo</h3>
+                    <p class="author">Taylor Jenkins Reid</p>
+                    <p>A captivating story of a Hollywood icon revealing her glamorous and scandalous life to an unknown journalist.</p>
+                    <span class="genre">Historical Fiction</span>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p class="footer-quote">"Books are a uniquely portable magic."</p>
+                <p class="footer-text">
+                    Thank you for visiting The Book Sanctuary. May your reading journey be filled with wonder, discovery, and endless adventures through the pages of great literature.
+                </p>
+                <p style="margin-top: 2rem; opacity: 0.7;">© 2025 The Book Sanctuary</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
